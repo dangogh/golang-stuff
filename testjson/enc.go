@@ -13,7 +13,7 @@ func check(e error) {
 
 func main() {
 
-	file, err := os.OpenFile("b.json", os.O_WRONLY)
+	file, err := os.OpenFile("b.json", os.O_WRONLY, os.ModePerm)
 	check(err)
 
 	enc := json.NewEncoder(file)
