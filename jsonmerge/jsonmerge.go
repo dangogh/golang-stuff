@@ -1,4 +1,3 @@
-
 package jsonmerge
 
 import (
@@ -7,16 +6,18 @@ import (
 	//"io"
 )
 
-type Merger interface{}
+type Merger map[string]interface{}
 
-func (r Merger) Merge(a interface{}) (interface{}, error) {
-	switch t := r.(type) {
-	case []interface{}:
-		fmt.Printf("slice %T\n", r)
-	case map[interface{}]interface{}:
-		fmt.Printf("map %T\n", r)
-	default:
-		fmt.Printf("Merging to a %T\n", r)
+func (r Merger) Merge(a interface{}) error {
+	for k, v := range r {
+		switch v.(type) {
+		case []interface{}:
+			fmt.Printf("%v - slice %T\n", k, v)
+		case map[interface{}]interface{}:
+			fmt.Printf("%v - map %T\n", k, v)
+		default:
+			fmt.Printf("%v - Merging to a %T\n", k, v)
+		}
 	}
+	return nil
 }
-
